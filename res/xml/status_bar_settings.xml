@@ -112,4 +112,11 @@
             android:defaultValue="true" />
     </PreferenceCategory>
 
+    <lineageos.preference.SecureSettingSwitchPreference
+         android:key="dark_statusbar"
+         android:title="@string/dark_statusbar_title"
+         android:summary="@string/dark_statusbar_description"
+         android:defaultValue="false" />
+
+
 </PreferenceScreen>
