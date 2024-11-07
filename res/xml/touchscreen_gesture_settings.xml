@@ -14,5 +14,11 @@
         android:title="@string/touchscreen_gestures_haptic_feedback_title"
         android:summary="@string/touchscreen_gestures_haptic_feedback_summary"
         android:defaultValue="true" />
-
+ 
+    <lineageos.preference.LineageSystemSettingListPreference
+            android:key="key_three_fingers_swipe_action"
+            android:dialogTitle="@string/gesture_three_finger_swipe_title"
+            android:title="@string/gesture_three_finger_swipe_title"
+            android:entries="@array/hardware_keys_action_entries"
+            android:entryValues="@array/hardware_keys_action_values" />
 </PreferenceScreen>

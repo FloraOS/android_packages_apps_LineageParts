@@ -682,6 +682,11 @@
     <string name="sms_security_check_limit_summary">Apps can send %s messages in 1 minute before requiring confirmation</string>
     <string name="sms_security_check_limit_summary_none">Apps are not allowed to send any messages without confirmation</string>
     <string name="sms_security_check_limit_always_confirm">Always confirm</string>
+    <!-- Dark statusbar -->
     <string name="dark_statusbar_title">Black statusbar</string>
     <string name="dark_statusbar_description">Always use black background for statusbar</string>
+    
+    <!-- Three-finger swipe -->
+    <string name="gesture_three_finger_swipe_title">Three-finger swipe</string>
+
 </resources>
