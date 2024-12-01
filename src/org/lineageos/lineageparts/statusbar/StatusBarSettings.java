@@ -12,6 +12,10 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -23,11 +27,15 @@ import org.lineageos.lineageparts.SettingsPreferenceFragment;
 import org.lineageos.lineageparts.utils.DeviceUtils;
 
 import lineageos.preference.LineageSystemSettingListPreference;
+import lineageos.preference.LineageSystemSettingSwitchPreference;
+import lineageos.preference.SecureSettingSwitchPreference;
 import lineageos.providers.LineageSettings;
 
 public class StatusBarSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
+    private static final String TAG = "StatusBarSettings";
+     
     private static final String CATEGORY_BATTERY = "status_bar_battery_key";
     private static final String CATEGORY_CLOCK = "status_bar_clock_key";
 
@@ -38,6 +46,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
+    private static final String STATUS_BAR_BLACK_BACKGROUND = "dark_statusbar";
 
     private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 2;
 
@@ -51,6 +60,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private LineageSystemSettingListPreference mStatusBarClock;
     private LineageSystemSettingListPreference mStatusBarAmPm;
     private LineageSystemSettingListPreference mStatusBarBatteryShowPercent;
+    
+    private SecureSettingSwitchPreference mDarkStatusBar;
 
     private PreferenceCategory mStatusBarBatteryCategory;
     private PreferenceCategory mStatusBarClockCategory;
@@ -79,6 +90,12 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mBatteryPresent = intent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
         }
         mStatusBarBatteryCategory = getPreferenceScreen().findPreference(CATEGORY_BATTERY);
+
+        mDarkStatusBar = findPreference(STATUS_BAR_BLACK_BACKGROUND);
+	mDarkStatusBar.setOnPreferenceChangeListener((preference, newValue) -> {
+	   updateStatusBarBackground();
+	   return true;   
+	});
 
         mQuickPulldown = findPreference(STATUS_BAR_QUICK_QS_PULLDOWN);
         mQuickPulldown.setOnPreferenceChangeListener(this);
@@ -135,10 +152,19 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         }
     }
 
+    private void updateStatusBarBackground(){
+        requireActivity().recreate();
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        int value = Integer.parseInt((String) newValue);
         String key = preference.getKey();
+	Log.d(TAG, key);
+        if(key == STATUS_BAR_BLACK_BACKGROUND){
+	    updateStatusBarBackground();
+	    return true;
+	}
+	int value = Integer.parseInt((String) newValue);
         switch (key) {
             case STATUS_BAR_QUICK_QS_PULLDOWN:
                 updateQuickPulldownSummary(value);
