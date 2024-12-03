@@ -455,4 +455,7 @@
     <string name="sms_security_check_limit_title">Обмеження SMS-повідомлень</string>
     <string name="sms_security_check_limit_summary">При спробі застосунків надіслати понад %s повідомлень за хвилину буде запитано підтвердження</string>
     <string name="sms_security_check_limit_always_confirm">Завжди підтверджувати</string>
+    <string name="gesture_three_finger_swipe_title">Провести трьома пальцями</string>
+    <string name="dark_statusbar_title">Пасок стану</string>
+    <string name="dark_statusbar_description">Завжди використовувати темне тло для паска стану</string>
 </resources>
